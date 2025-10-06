@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Login - FreelaManager</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="bg">
+  <div class="center-card">
+    <h1>FreelaManager</h1>
+    <form method="post">
+      <label>Usuário</label>
+      <input name="username" placeholder="admin" required>
+      <label>Senha</label>
+      <input name="password" type="password" placeholder="password123" required>
+      <button class="btn">Entrar</button>
+    </form>
+    <p class="muted">Usuário demo: <b>admin</b> / <b>password123</b></p>
+  </div>
+</body>
+</html>

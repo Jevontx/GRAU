@@ -1,0 +1,12 @@
+[
+  {
+    "id": "Jevontx#0001",
+    "nome": "Guilherme Jevon",
+    "idade": "17",
+    "categoria": "Tech",
+    "cargo": "Programador, cybersegurança.",
+    "valor_hora": 45.0,
+    "disponibilidade": true,
+    "fornecedor": "Lyvon Business"
+  }
+]

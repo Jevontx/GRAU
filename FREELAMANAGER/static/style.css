@@ -1,0 +1,51 @@
+/* Paleta: preto + verde tech + suaves gradientes */
+:root{
+  --bg1: #021309;
+  --bg2: #032b1a;
+  --accent: #00ff88;
+  --card: #061a14;
+  --muted: #8fb8a3;
+}
+
+*{ box-sizing: border-box; font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; color: #e6fff3; }
+body.bg{
+  margin:0; min-height:100vh;
+  background: linear-gradient(135deg,var(--bg1), var(--bg2));
+  display:flex;
+}
+.sidebar{
+  width:220px; background: linear-gradient(180deg, rgba(0,0,0,0.25), rgba(0,0,0,0.15));
+  padding:20px; border-right:1px solid rgba(0,255,136,0.06);
+}
+.sidebar h2{ margin:4px 0 12px; color:var(--accent); font-size:20px; }
+.user{ font-size:14px; color:var(--muted); margin-bottom:12px; }
+.side-btn{ display:block; padding:8px 10px; margin:6px 0; color:var(--muted); text-decoration:none; border-radius:8px; }
+.side-btn:hover{ background:rgba(0,255,136,0.05); color:var(--accent); }
+
+.main{ flex:1; padding:24px; }
+header{ display:flex; justify-content:flex-end; gap:10px; margin-bottom:18px; }
+header input{ padding:8px 12px; width:320px; border-radius:8px; border:1px solid rgba(0,255,136,0.08); background:rgba(255,255,255,0.03); color:inherit; }
+.btn{ background:linear-gradient(90deg,var(--accent), #6effb6); border:none; padding:8px 12px; border-radius:8px; cursor:pointer; color:#00220f; font-weight:600; }
+.btn:hover{ filter:brightness(0.95); }
+
+.table{ width:100%; border-collapse:collapse; margin-bottom:18px; background:transparent; }
+.table th{ text-align:left; color:var(--muted); padding:10px; font-size:13px; }
+.table td{ padding:10px; border-top:1px solid rgba(255,255,255,0.03); }
+
+.card{ background: linear-gradient(180deg, rgba(0,0,0,0.20), rgba(0,0,0,0.15)); padding:14px; border-radius:10px; margin-top:18px; max-width:720px; }
+.card label{ display:block; margin-top:8px; font-size:13px; color:var(--muted); }
+.card input{ width:100%; padding:8px 10px; margin-top:6px; border-radius:8px; border:1px solid rgba(0,255,136,0.06); background:rgba(255,255,255,0.02); color:inherit; }
+
+.center-card{
+  margin:auto; width:360px; padding:20px; border-radius:12px; background:linear-gradient(180deg, rgba(0,0,0,0.35), rgba(0,0,0,0.2));
+  box-shadow: 0 6px 20px rgba(0,0,0,0.6); text-align:center;
+}
+.center-card h1{ color:var(--accent); margin-bottom:8px; }
+.muted{ color:var(--muted); font-size:12px; margin-top:10px; }
+.link{ color:var(--accent); text-decoration:none; margin-right:8px; }
+.link.danger{ color:#ff6b6b; }
+
+@media(max-width:800px){
+  .sidebar{ display:none; }
+  .main{ padding:12px; }
+}

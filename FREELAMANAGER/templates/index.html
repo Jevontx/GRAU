@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Dashboard - FreelaManager</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    /* small override to keep layout compact */
+    .table td, .table th { padding:8px 10px; }
+  </style>
+</head>
+<body class="bg">
+  <div class="sidebar">
+    <h2>FreelaManager</h2>
+    <div class="user">Olá, {{ user }}</div>
+    <a class="side-btn" href="{{ url_for('home') }}">Dashboard</a>
+    <a class="side-btn" href="#" onclick="document.getElementById('add-form').scrollIntoView()">Cadastrar</a>
+    <a class="side-btn" href="{{ url_for('logout') }}">Sair</a>
+  </div>
+
+  <div class="main">
+    <header>
+      <form method="get" action="{{ url_for('home') }}">
+        <input name="q" placeholder="Buscar por nome ou categoria" value="{{ q }}">
+        <button class="btn">Buscar</button>
+      </form>
+    </header>
+
+    <section id="list">
+      <h3>Freelancers</h3>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th><th>Nome</th><th>Categoria</th><th>Cargo</th><th>Valor/H</th><th>Disponível</th><th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for f in freelancers %}
+          <tr>
+            <td>{{ f.id }}</td>
+            <td>{{ f.nome }}</td>
+            <td>{{ f.categoria }}</td>
+            <td>{{ f.cargo }}</td>
+            <td>R$ {{ '%.2f'|format(f.valor_hora) }}</td>
+            <td>{{ 'Sim' if f.disponibilidade else 'Não' }}</td>
+            <td>
+              {% if f.disponibilidade %}
+                <a href="{{ url_for('ocupar_route', id=f.id) }}" class="link">Ocupar</a>
+              {% else %}
+                <a href="{{ url_for('liberar_route', id=f.id) }}" class="link">Liberar</a>
+              {% endif %}
+              <a href="{{ url_for('remove_route', id=f.id) }}" class="link danger">Remover</a>
+            </td>
+          </tr>
+        {% else %}
+          <tr><td colspan="7">Nenhum freelancer cadastrado.</td></tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </section>
+
+    <section id="add-form" class="card">
+      <h3>Cadastrar Freelancer</h3>
+      <form method="post" action="{{ url_for('add') }}">
+        <label>ID</label><input name="id" required>
+        <label>Nome</label><input name="nome" required>
+        <label>Idade</label><input name="idade">
+        <label>Categoria</label><input name="categoria">
+        <label>Cargo</label><input name="cargo">
+        <label>Valor por hora</label><input name="valor_hora" required>
+        <label>Fornecedor</label><input name="fornecedor">
+        <label><input type="checkbox" name="disponibilidade" checked> Disponível</label>
+        <button class="btn">Cadastrar</button>
+      </form>
+    </section>
+
+  </div>
+</body>
+</html>
