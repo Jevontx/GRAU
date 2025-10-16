@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diagrama de Pacotes UML</title>
+<style>
+  body {
+    background-color: #000;
+    font-family: "Courier New", monospace;
+    color: #00ff88;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100vh;
+    margin: 0;
+    padding-top: 30px;
+  }
+
+  h1 {
+    text-shadow: 0 0 10px #00ff99, 0 0 20px #00ff99;
+    margin-bottom: 25px;
+  }
+
+  .diagram {
+    position: relative;
+    width: 900px;
+    height: 550px;
+    border: 1px solid #00ff99;
+    border-radius: 12px;
+    box-shadow: 0 0 25px #00ff99;
+    background: radial-gradient(circle at center, rgba(0, 255, 80, 0.07), transparent 70%);
+    overflow: visible;
+  }
+
+  /* PASTAS */
+  .package {
+    position: absolute;
+    text-align: center;
+    cursor: pointer;
+    z-index: 2;
+  }
+
+  .folder {
+    position: relative;
+    width: 160px;
+    height: 90px;
+    border: 2px solid #00ff99;
+    border-radius: 4px;
+    background: rgba(0, 30, 0, 0.4);
+    box-shadow: 0 0 20px rgba(0,255,100,0.3);
+  }
+
+  .folder::before {
+    content: "";
+    position: absolute;
+    top: -14px;
+    left: 10px;
+    width: 50px;
+    height: 14px;
+    border: 2px solid #00ff99;
+    border-bottom: none;
+    border-radius: 4px 4px 0 0;
+    background: rgba(0, 30, 0, 0.6);
+  }
+
+  .package span {
+    margin-top: 5px;
+    display: block;
+    font-weight: bold;
+    color: #00ff99;
+    text-shadow: 0 0 5px #00ff99;
+  }
+
+  /* TOOLTIP */
+  .tooltip {
+    position: absolute;
+    top: -70px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 30, 0, 0.95);
+    border: 1px solid #00ff99;
+    border-radius: 5px;
+    padding: 8px;
+    width: 200px;
+    font-size: 13px;
+    text-align: left;
+    box-shadow: 0 0 15px #00ff99;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s;
+    z-index: 10;
+    pointer-events: none;
+  }
+
+  .package:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .package:hover .folder {
+    box-shadow: 0 0 35px #00ff99;
+    transform: scale(1.05);
+    transition: 0.3s;
+  }
+
+  /* LINHAS E SETAS */
+  svg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+  }
+
+  line, path {
+    stroke: #00ff99;
+    stroke-width: 2;
+    fill: none;
+  }
+
+  .dashed {
+    stroke-dasharray: 6;
+  }
+
+  marker polygon {
+    fill: #00ff99;
+  }
+</style>
+</head>
+<body>
+<h1>Pacotes UML</h1>
+<div class="diagram">
+  <!-- Pacote principal -->
+  <div class="package" style="top: 40px; left: 370px;">
+    <div class="folder"></div>
+    <span>Sistema Principal</span>
+    <div class="tooltip">Coordena os módulos principais e controla o fluxo geral da aplicação.</div>
+  </div>
+
+  <!-- Interface de Usuário -->
+  <div class="package" style="top: 220px; left: 100px;">
+    <div class="folder"></div>
+    <span>Interface de Usuário</span>
+    <div class="tooltip">Responsável por interagir com o usuário e exibir dados visuais.</div>
+  </div>
+
+  <!-- Lógica de Negócio -->
+  <div class="package" style="top: 220px; left: 370px;">
+    <div class="folder"></div>
+    <span>Lógica de Negócio</span>
+    <div class="tooltip">Contém as regras de negócio e o processamento central do sistema.</div>
+  </div>
+
+  <!-- Camada de Dados -->
+  <div class="package" style="top: 220px; left: 640px;">
+    <div class="folder"></div>
+    <span>Camada de Dados</span>
+    <div class="tooltip">Gerencia a persistência e comunicação com o banco de dados.</div>
+  </div>
+
+  <!-- Utilidades -->
+  <div class="package" style="top: 410px; left: 370px;">
+    <div class="folder"></div>
+    <span>Utilidades</span>
+    <div class="tooltip">Contém funções auxiliares e ferramentas reutilizáveis.</div>
+  </div>
+
+  <!-- Conexões com SVG -->
+  <svg>
+    <defs>
+      <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="5" refY="3" orient="auto">
+        <polygon points="0 0, 6 3, 0 6" />
+      </marker>
+    </defs>
+
+    <!-- Relações sólidas -->
+    <line x1="450" y1="130" x2="220" y2="220" marker-end="url(#arrowhead)" />
+    <line x1="450" y1="130" x2="450" y2="220" marker-end="url(#arrowhead)" />
+    <line x1="450" y1="130" x2="680" y2="220" marker-end="url(#arrowhead)" />
+
+    <!-- Dependência tracejada -->
+    <path d="M450,310 L450,400" class="dashed" marker-end="url(#arrowhead)" />
+  </svg>
+</div>
+</body>
+</html>
